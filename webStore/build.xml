@@ -6,69 +6,71 @@
 
 <project name="adempiereWebStore" default="main" basedir=".">
 
-  <!--<property environment="env"/>-->
-  <import file="../utils_dev/properties.xml"/>
+    <!--<property environment="env"/>-->
+    <import file="../utils_dev/properties.xml"/>
 
-  <property name="src.dir" value="${basedir}/src"/>
-  <property name="src.main.dir" value="${src.dir}/main"/>
-  <property name="src.web.dir" value="${src.dir}/web"/>
+    <property file="../build.properties"/>
 
-  <property name="build.dir" value="${basedir}/build"/>
-  <property name="build.deploy.dir" value="${build.dir}/deploy"/>
+    <property name="src.dir" value="${basedir}/src"/>
+    <property name="src.main.dir" value="${src.dir}/main"/>
+    <property name="src.web.dir" value="${src.dir}/web"/>
 
-  <target name="init">
-    <echo message="=========== Build Web Store"/>
+    <property name="build.dir" value="${basedir}/build"/>
+    <property name="build.deploy.dir" value="${build.dir}/deploy"/>
 
-    <tstamp/>
-    <mkdir dir="${build.deploy.dir}"/>
-  </target>
+    <target name="init">
+        <echo message="=========== Build Web Store"/>
 
-  <!-- =================================================================== -->
-  <!-- Creates the war archives                                            -->
-  <!-- =================================================================== -->
-  <target name="war" depends="init">
-    <war
-	  warfile="${build.deploy.dir}/adempiereWebStore.war"
-	  webxml="${src.web.dir}/WEB-INF/web.xml">
-      <fileset dir="${src.web.dir}" excludes="**/web.xml,**/lib/**,**/classes/**"/>
-      <manifest>
-		<attribute name="Specification-Title" value="AdempiereWebStore"/>
-		<attribute name="Specification-Version" value="${env.ADEMPIERE_VERSION}"/>
-		<attribute name="Specification-Vendor" value="Adempiere, Inc."/>
-		<attribute name="Implementation-Title" value="AdempiereWebStore ${env.ADEMPIERE_VERSION}"/>
-		<attribute name="Implementation-Version" value="${env.ADEMPIERE_VERSION} ${DSTAMP}-${TSTAMP}"/>
-		<attribute name="Implementation-Vendor" value="${env.ADEMPIERE_VENDOR}"/>
-		<attribute name="Implementation-URL" value="http://www.adempiere.net"/>
-		<attribute name="Class-Path" value="Adempiere.jar AdempiereSLib.jar adempiereApps.jar"/>
-      </manifest>
-    </war>
-  </target>
+        <tstamp/>
+        <mkdir dir="${build.deploy.dir}"/>
+    </target>
 
-  <!-- =================================================================== -->
-  <!-- Creates the server binary                                           -->
-  <!-- =================================================================== -->
-  <target name="deploy-server" depends="war">
-	<copy file="src/ear/application.xml" tofile="../lib/adempiereWebStore.xml"/>
-    <copy todir="../lib">
-      <fileset dir="${build.deploy.dir}" includes="*.jar,*.war,*.ear"/>
-    </copy>
-  </target>
+    <!-- =================================================================== -->
+    <!-- Creates the war archives                                            -->
+    <!-- =================================================================== -->
+    <target name="war" depends="init">
+        <war
+                warfile="${build.deploy.dir}/adempiereWebStore.war"
+                webxml="${src.web.dir}/WEB-INF/web.xml">
+            <fileset dir="${src.web.dir}" excludes="**/web.xml,**/lib/**,**/classes/**"/>
+            <manifest>
+                <attribute name="Specification-Title" value="AdempiereWebStore"/>
+                <attribute name="Specification-Version" value="${env.ADEMPIERE_VERSION}"/>
+                <attribute name="Specification-Vendor" value="Adempiere, Inc."/>
+                <attribute name="Implementation-Title" value="AdempiereWebStore ${env.ADEMPIERE_VERSION}"/>
+                <attribute name="Implementation-Version" value="${env.ADEMPIERE_VERSION} ${DSTAMP}-${TSTAMP}"/>
+                <attribute name="Implementation-Vendor" value="${env.ADEMPIERE_VENDOR}"/>
+                <attribute name="Implementation-URL" value="http://www.adempiere.com"/>
+                <attribute name="Class-Path" value="Adempiere.jar AdempiereSLib.jar adempiereApps.jar"/>
+            </manifest>
+        </war>
+    </target>
 
-
-  <!-- =================================================================== -->
-  <!-- Creates the binary structure                                        -->
-  <!-- =================================================================== -->
-  <target name="main" depends="deploy-server">
-  </target>
+    <!-- =================================================================== -->
+    <!-- Creates the server binary                                           -->
+    <!-- =================================================================== -->
+    <target name="deploy-server" depends="war">
+        <copy file="src/ear/application.xml" tofile="../lib/adempiereWebStore.xml"/>
+        <copy todir="../lib">
+            <fileset dir="${build.deploy.dir}" includes="*.jar,*.war,*.ear"/>
+        </copy>
+    </target>
 
 
-  <!-- =================================================================== -->
-  <!-- Cleans up the current build                                         -->
-  <!-- =================================================================== -->
-  <target name="clean">
-    <delete dir="${build.dir}"/>
-    <delete file="../lib/adempiereWebStore.war" failonerror="false"/>
-    <delete file="../lib/adempiereWebStore.xml"/>
-  </target>
-  
+    <!-- =================================================================== -->
+    <!-- Creates the binary structure                                        -->
+    <!-- =================================================================== -->
+    <target name="main" depends="deploy-server">
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Cleans up the current build                                         -->
+    <!-- =================================================================== -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete file="../lib/adempiereWebStore.war" failonerror="false"/>
+        <delete file="../lib/adempiereWebStore.xml"/>
+    </target>
+
 </project>
