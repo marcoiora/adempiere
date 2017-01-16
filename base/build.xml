@@ -58,7 +58,7 @@
         <!-- compile the java code from ${src} into ${build.dir} -->
         <javac target="${javac.target}" encoding="UTF-8" fork="true"
                destdir="${build.dir}" deprecation="on" debug="${javac.debug}"
-               memoryinitialsize="${javac.memory.initial}" memorymaximumsize="${java.memory.target}">
+               memoryinitialsize="${javac.memory.initial}" memorymaximumsize="${javac.memory.maximum}">
             <src path="${src}"/>
             <src path="${looksSrc}"/>
             <src path="../glassfishfacet/src"/>

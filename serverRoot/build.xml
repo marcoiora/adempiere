@@ -4,7 +4,7 @@
 <!-- ============================================= -->
 <!-- $Header: /cvs/adempiere/serverRoot/build.xml,v 1.4 2006/06/10 21:58:02 jjanke Exp $-->
 
-<project name="adempiereRoot" default="main" basedir=".">
+<project name="adempiereRoot" basedir=".">
 
     <!--<property environment="env"/>-->
     <import file="../utils_dev/properties.xml"/>
@@ -64,15 +64,14 @@
         <mkdir dir="${build.classes.dir}"/>
 
         <!--	Compile all -->
-        <javac target="${javac.target}" source="${javac.source}” encoding="UTF-8"
+        <javac
+                target="${javac.target}"
+                encoding="UTF-8"
                 destdir="${build.classes.dir}"
                 debug="${javac.debug}"
                 deprecation="off"
                 optimize="on"
                 classpathref="base.path">
-            <src path="${src.ejb.dir}"/>
-            <src path="${src.servlet.dir}"/>
-            <src path="${src.server.dir}"/>
         </javac>
 
     </target>

@@ -10,6 +10,7 @@
 	This buildfile is used to create the Adempiere installer.
   </description>
 
+	<property file="../build.properties"/>
   <!--<property environment="env"/>-->
   <import file="../utils_dev/properties.xml"/>
   <property name="adempiere.dir" value="../"/>
@@ -63,7 +64,7 @@
   <!-- ======================================================= -->
   <target name="installCompile" depends="installInit">
 	<!-- compile the java code from ${src} into ${build.dir} -->
-	<javac  target="1.7" encoding="UTF-8" srcdir="${src}" destdir="${compile.dir}" deprecation="on" debug="on">
+	<javac  target="${javac.target}" encoding="UTF-8" srcdir="${src}" destdir="${compile.dir}" deprecation="on" debug="on">
 	  <classpath refid="project.class.path"/>
 	</javac>
 	<!-- copy all image & sound files from src to the build directory -->

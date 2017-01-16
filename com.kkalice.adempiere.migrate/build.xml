@@ -22,6 +22,7 @@
     <!-- Properties                                  -->
     <!-- =========================================== -->
 
+    <property file="../build.properties"/>
     <!-- import global properties -->
     <import file="../utils_dev/properties.xml" optional="true"/>
 
@@ -87,7 +88,7 @@
     <!-- =========================================== -->
     <target name="migrateCompile" depends="migrateInit" unless="jar.uptodate">
         <!-- compile the java code -->
-        <javac srcdir="${source.dir}" destdir="${build.dir}" includeAntRuntime="false">
+        <javac target="${javac.target}"  srcdir="${source.dir}" destdir="${build.dir}" includeAntRuntime="false">
             <classpath refid="project.class.path"/>
         </javac>
         <!-- copy all image & sound files from source to the build directory -->

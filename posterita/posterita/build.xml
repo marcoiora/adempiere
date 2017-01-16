@@ -50,7 +50,7 @@
         <!-- compile the java code from ${src} into ${build.dir} -->
         <mkdir dir="${src.web.dir}/WEB-INF/classes"/>
         <javac srcdir="${src.main.dir}" destdir="${src.web.dir}/WEB-INF/classes" deprecation="on" source="${javac.source}"
-               target="${javac.target}" debug="${javac.debug">
+               target="${javac.target}" debug="${javac.debug}">
             <classpath>
                 <fileset dir="${src.web.dir}/WEB-INF/lib/">
                     <include name="*.jar"/>

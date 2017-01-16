@@ -74,7 +74,7 @@
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="WEB-INF/src"
                destdir="${classes.dir}"
-               target="${javac.target"
+               target="${javac.target}"
                source="${javac.source}"
                debug="${javac.debug}"
                deprecation="${compile.deprecation}"
